@@ -32,23 +32,65 @@
   <title>dynamic_view_sizing</title>
   <link rel="manifest" href="manifest.json">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
-  </script>
+  <style>
+  /* Some flexbox shenanigans */
+  * { box-sizing: border-box; font-family: sans-serif; }
+  html, body { margin: 0; height: 100%; }
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .content {
+    display: flex;
+    background: #f90;
+    flex: 1;
+    flex-direction: row;
+  }
+  aside {
+    border-right: 2px solid black;
+    padding: 10px;
+    width: 250px;
+  }
+  content {
+    background: #09f;
+    flex: 1;
+    /* To make content flex, and scrollable, we need to calc its height. */
+    height: calc(100vh - 118px);
+    overflow-y: auto;
+  }
+  aside, content { padding: 10px; }
+  nav, footer { padding: 0px 10px; background: #fabada; }
+  </style>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <div class="container">
+    <nav>
+      <h1>Title</h1>
+    </nav>
+    <div class="content">
+    <aside>Side</aside>
+    <content>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Read some <em>Lorem Ipsum</em> text rendered by Flutter below:</p>
+      <div id="flipsum" class="flutter-app"></div>
+      <p>That was some nice Lorem ipsum!</p>
+      <p><small><em>Why not selectable?</em> <a href="https://github.com/flutter/flutter/issues/137875">WIP!</a></small></p>
+      </content>
+    </div>
+    <footer>
+      <p>A footer.</p>
+    </footer>
+  </div>
+
   <script>
     window.addEventListener('load', function(ev) {
-      // Download main.dart.js
       _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
         onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+          engineInitializer.initializeEngine({
+            hostElement: flipsum,
+          }).then(function(appRunner) {
             appRunner.runApp();
           });
         }
