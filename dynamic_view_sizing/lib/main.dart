@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 
+import 'src/multiview.dart';
+
 void main() {
-  runApp(const MyApp());
+  runAppWithoutImplicitView(
+    MultiViewApp(
+      viewBuilder: (BuildContext context) {
+        return const Lipsum();
+      },
+    )
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class Lipsum extends StatefulWidget {
+  const Lipsum({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<Lipsum> createState() => _LipsumState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _LipsumState extends State<Lipsum> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
