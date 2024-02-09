@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'src/multiview.dart';
 
 void main() {
-  runAppWithoutImplicitView(
+  runWidget(
     MultiViewApp(
       viewBuilder: (BuildContext context) {
         return const Lipsum();

@@ -1,14 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-void runAppWithoutImplicitView(Widget app) {
-  final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
-  assert(binding.debugCheckZone('runApp'));
-  binding
-    ..scheduleAttachRootWidget(app) // ignore: invalid_use_of_protected_member
-    ..scheduleWarmUpFrame();
-}
-
 /// Calls [viewBuilder] for every view added to the app to obtain the widget to
 /// render into that view. The current view can be looked up with [View.of].
 class MultiViewApp extends StatefulWidget {
